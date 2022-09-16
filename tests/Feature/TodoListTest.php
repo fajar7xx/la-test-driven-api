@@ -23,19 +23,14 @@ class TodoListTest extends TestCase
      */
     public function test_fetch_all_todo_lists()
     {
-//        TodoList::create([
-//            'name' => 'daftar list yang akan di buat'
-//        ]);
-
         $lists = TodoList::factory()->create([
             'name' => 'my list'
         ]);
-//        dd($lists);
 
         $response = $this->getJson('api/todo-list');
 
-        $this->assertEquals(1, count($response->json()));
-        $this->assertEquals('my list', $response->json()[0]['name']);
+        $this->assertEquals(2, count($response->json()));
+        $this->assertEquals($this->list->name, $response->json()[0]['name']);
     }
 
 
@@ -47,5 +42,80 @@ class TodoListTest extends TestCase
 
         $response->assertOk();
         $this->assertEquals($response->json()['name'], $this->list->name);
+    }
+
+    /**
+     * test store new todo list
+     * @return void
+     */
+    public function test_store_new_todo_list(): void
+    {
+        $list = TodoList::factory()->make();
+        $response = $this->postJson('api/todo-list', [
+            'name' => $list->name
+        ]);
+
+        $response->assertCreated();
+        $this->assertEquals($list->name, $response['name']);
+        $this->assertDatabaseHas('todo_lists', [
+            'name' => $list->name
+        ]);
+    }
+
+    /**
+     * test store data that name field must required
+     * @return void
+     */
+    public function test_while_storing_todo_list_name_field_is_required(): void
+    {
+        $this->withExceptionHandling();
+        $response = $this->postJson('api/todo-list');
+        $response->assertUnprocessable();
+        $response->assertJsonValidationErrors(['name']);
+//        $this->assertSame(
+//            \Lang::get('validation.required'),
+//            $response->json('errors.name.0')
+//        );
+    }
+
+    /**
+     * @return array[]
+     */
+    public function validationErrors(): array
+    {
+        return [
+            [['name' => ''], 'name', 'validation.required'],
+            [['name' => \Str::random(4)], 'name', 'validation.min.string', ['min' => 5]]
+        ];
+    }
+
+    /**
+     * @dataProvider validationErrors
+     */
+    public function test_validation_store_todo_list_errors(
+        array $invalidData,
+        string $invalidField,
+        string $errorMessage,
+        array $messageParams = []
+    ): void
+    {
+        $this->withExceptionHandling();
+        TodoList::factory()->create();
+
+        $response = $this->postJson('api/todo-list', $invalidData);
+
+        $response->assertUnprocessable();
+        $response->assertJsonValidationErrors($invalidField);
+        $this->assertTrue(\Lang::has($errorMessage));
+        $this->assertSame(
+            \Lang::get(
+                $errorMessage,
+                array_merge(
+                    ['attribute', str_replace('_', ' ', $invalidField)],
+                    $messageParams
+                )
+            ),
+            $response->json("errors.{$invalidField}.0")
+        );
     }
 }

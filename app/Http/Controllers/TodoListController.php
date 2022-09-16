@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TodoListStoreRequest;
 use App\Models\TodoList;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ *
+ */
 class TodoListController extends Controller
 {
     /**
@@ -24,15 +29,20 @@ class TodoListController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  TodoListStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TodoListStoreRequest $request)
     {
-        //
+        $list = TodoList::create([
+            'name' => $request->name
+        ]);
+
+        return response($list, Response::HTTP_CREATED);
     }
 
     /**
+     *
      * Display the specified resource.
      *
      * @param  \App\Models\TodoList  $todoList
