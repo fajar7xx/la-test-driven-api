@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoListStoreRequest;
+use App\Http\Requests\TodoListUpdateRequest;
 use App\Models\TodoList;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,9 +61,12 @@ class TodoListController extends Controller
      * @param  \App\Models\TodoList  $todoList
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TodoList $todoList)
+    public function update(TodoListUpdateRequest $request, TodoList $todo_list)
     {
-        //
+        $todo_list->name = $request->name;
+        $todo_list->save();
+
+        return response($todo_list);
     }
 
     /**
@@ -71,8 +75,9 @@ class TodoListController extends Controller
      * @param  \App\Models\TodoList  $todoList
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TodoList $todoList)
+    public function destroy(TodoList $todo_list)
     {
-        //
+        $todo_list->delete();
+        return response('', Response::HTTP_NO_CONTENT);
     }
 }
