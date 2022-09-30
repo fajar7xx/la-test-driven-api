@@ -20,7 +20,7 @@ class TodoListController extends Controller
      */
     public function index()
     {
-        $lists = TodoList::all();
+        $lists = TodoList::paginate();
 //        return response()->json([
 //            "data" => "data"
 //        ]);
