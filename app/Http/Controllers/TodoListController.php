@@ -21,9 +21,6 @@ class TodoListController extends Controller
     public function index()
     {
         $lists = TodoList::paginate();
-//        return response()->json([
-//            "data" => "data"
-//        ]);
         return response($lists);
     }
 

@@ -2,30 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTaskRequest;
-use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
-use Symfony\Component\HttpFoundation\Response;
+use App\Models\TodoList;
+use Illuminate\Http\Request;
 
-class TaskController extends Controller
+class TodoListTaskController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Models\TodoList  $todoList
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TodoList $todoList)
     {
-        $tasks = Task::all();
-        return response($tasks);
+        //
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \App\Models\TodoList  $todoList
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(TodoList $todoList)
     {
         //
     }
@@ -33,24 +33,23 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTaskRequest  $request
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\TodoList  $todoList
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTaskRequest $request)
+    public function store(Request $request, TodoList $todoList)
     {
-        $task = Task::create([
-            'title'  => $request->title
-        ]);
-        return response($task, Response::HTTP_CREATED);
+        //
     }
 
     /**
      * Display the specified resource.
      *
+     * @param  \App\Models\TodoList  $todoList
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $task)
+    public function show(TodoList $todoList, Task $task)
     {
         //
     }
@@ -58,10 +57,11 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \App\Models\TodoList  $todoList
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function edit(Task $task)
+    public function edit(TodoList $todoList, Task $task)
     {
         //
     }
@@ -69,11 +69,12 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTaskRequest  $request
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\TodoList  $todoList
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTaskRequest $request, Task $task)
+    public function update(Request $request, TodoList $todoList, Task $task)
     {
         //
     }
@@ -81,12 +82,12 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \App\Models\TodoList  $todoList
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy(TodoList $todoList, Task $task)
     {
-        $task->delete();
-        return response('', Response::HTTP_NO_CONTENT);
+        //
     }
 }
