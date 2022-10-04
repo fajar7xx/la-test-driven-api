@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\TodoList;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class TodoListTaskController extends Controller
 {
@@ -14,9 +15,10 @@ class TodoListTaskController extends Controller
      * @param  \App\Models\TodoList  $todoList
      * @return \Illuminate\Http\Response
      */
-    public function index(TodoList $todoList)
+    public function index(TodoList $todoList): Response
     {
-        //
+        $tasks = $todoList->tasks;
+        return response($tasks);
     }
 
     /**
@@ -39,7 +41,16 @@ class TodoListTaskController extends Controller
      */
     public function store(Request $request, TodoList $todoList)
     {
-        //
+        // $task = Task::create([
+        //     'title' => $request->title,
+        //     'todo_list_id' => $todoList->id
+        // ]);
+
+        $task = $todoList->tasks()->create([
+            'name' => $request->name
+        ]);
+
+        return $task;
     }
 
     /**
