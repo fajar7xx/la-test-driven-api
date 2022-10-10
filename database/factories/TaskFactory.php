@@ -26,7 +26,7 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence,
+            'title' => fake()->sentence,
             'todo_list_id' => function(){
                 return TodoList::factory()->create()->id;
             },

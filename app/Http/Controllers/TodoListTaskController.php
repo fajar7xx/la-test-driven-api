@@ -47,7 +47,7 @@ class TodoListTaskController extends Controller
         // ]);
 
         $task = $todoList->tasks()->create([
-            'name' => $request->name
+            'title' => $request->title
         ]);
 
         return $task;
@@ -81,13 +81,19 @@ class TodoListTaskController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TodoList  $todoList
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TodoList $todoList, Task $task)
+    public function update(Request $request, Task $task)
     {
-        //
+        // $todoList->task()->save([
+        //     'title' => $request->title
+        // ]);
+
+        $task->title = $request->title;
+        $task->save();
+
+        return response($task);
     }
 
     /**
@@ -99,6 +105,7 @@ class TodoListTaskController extends Controller
      */
     public function destroy(TodoList $todoList, Task $task)
     {
-        //
+        $task->delete();
+        return response('', Response::HTTP_NO_CONTENT);
     }
 }

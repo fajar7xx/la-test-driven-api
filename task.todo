@@ -3,9 +3,9 @@ task todo:
     ✔ https://youtu.be/ncLocOVmfE0?list=PLe30vg_FG4OQjsSiCbJhje5jAua12JjTc @done(22-09-30 11:11)
     ✔ https://youtu.be/8qlLm7cWUQ4?list=PLe30vg_FG4OQjsSiCbJhje5jAua12JjTc @done(22-10-03 11:45)
     ✔ https://youtu.be/pfrYULKtc3M?list=PLe30vg_FG4OQjsSiCbJhje5jAua12JjTc untuk memahasi keduanya @done(22-10-03 11:45)
-    ☐ https://youtu.be/CLMQKKLQV4I?list=PLe30vg_FG4OQjsSiCbJhje5jAua12JjTc ada masalah pada pembuatan nested controller
-    ☐ https://youtu.be/4szEP5y_krQ?list=PLe30vg_FG4OQjsSiCbJhje5jAua12JjTc
-    ☐ https://youtu.be/_OHj72a4woM?list=PLe30vg_FG4OQjsSiCbJhje5jAua12JjTc
+    ✔ https://youtu.be/CLMQKKLQV4I?list=PLe30vg_FG4OQjsSiCbJhje5jAua12JjTc ada masalah pada pembuatan nested controller @done(22-10-10 10:46)
+    ✔ https://youtu.be/4szEP5y_krQ?list=PLe30vg_FG4OQjsSiCbJhje5jAua12JjTc @done(22-10-10 10:47)
+    ☐ https://youtu.be/_OHj72a4woM?list=PLe30vg_FG4OQjsSiCbJhje5jAua12JjTc writing hasmay relationship
 
 error:
 test untuk validasi menggunakan provider dan validation belum oke dan masih erro
